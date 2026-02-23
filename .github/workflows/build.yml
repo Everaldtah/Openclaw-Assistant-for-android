@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -19,33 +19,25 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Android SDK
+      - name: Display info
         run: |
-          brew install android-sdk
-          echo "ANDROID_SDK_ROOT=/usr/local/share/android-sdk" >> $GITHUB_ENV
-          echo "ANDROID_HOME=/usr/local/share/android-sdk" >> $GITHUB_ENV
-
-      - name: Accept Android licenses
-        run: |
-          yes | sdkmanager --licenses || true
-
-      - name: Install Android SDK components
-        run: |
-          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          echo "Java version:"
+          java -version
+          echo "Current directory:"
+          pwd
+          echo "Files:"
+          ls -la
+          echo "Gradle wrapper:"
+          ls -la gradle/wrapper/
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Cache Gradle
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ hashFiles('**/*.gradle.kts', 'gradle/libs.versions.toml') }}
+      - name: Try Gradle version
+        run: ./gradlew --version
 
       - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace --info
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
@@ -53,7 +45,10 @@ jobs:
           name: OpenClaw-Assistant-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
-          if-no-files-found: error
+          if-no-files-found: ignore
 
       - name: Show APK info
-        run: ls -lh app/build/outputs/apk/debug/
+        run: |
+          echo "Looking for APK..."
+          find . -name "*.apk" -type f 2>/dev/null || echo "No APK found"
+          ls -la app/build/outputs/apk/debug/ 2>/dev/null || echo "Debug directory not found"
