@@ -21,34 +21,41 @@ jobs:
 
       - name: Display info
         run: |
-          echo "Java version:"
-          java -version
-          echo "Current directory:"
-          pwd
-          echo "Files:"
-          ls -la
-          echo "Gradle wrapper:"
-          ls -la gradle/wrapper/
+          echo "===== ENVIRONMENT INFO =====" > build.log
+          echo "Java version:" >> build.log
+          java -version 2>&1 | tee -a build.log
+          echo "Current directory:" >> build.log
+          pwd >> build.log
+          echo "Files:" >> build.log
+          ls -la >> build.log
+          echo "Gradle wrapper:" >> build.log
+          ls -la gradle/wrapper/ >> build.log
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Try Gradle version
-        run: ./gradlew --version
+        run: |
+          echo "===== GRADLE VERSION =====" >> build.log
+          ./gradlew --version 2>&1 | tee -a build.log || echo "Gradle failed" >> build.log
 
       - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace --info
+        run: |
+          echo "===== BUILD OUTPUT =====" >> build.log
+          ./gradlew :app:assembleDebug --no-daemon --stacktrace 2>&1 | tee -a build.log || echo "Build failed with code $?" >> build.log
+
+      - name: Upload build log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-log
+          path: build.log
+          retention-days: 7
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
+        if: success()
         with:
           name: OpenClaw-Assistant-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
-          if-no-files-found: ignore
-
-      - name: Show APK info
-        run: |
-          echo "Looking for APK..."
-          find . -name "*.apk" -type f 2>/dev/null || echo "No APK found"
-          ls -la app/build/outputs/apk/debug/ 2>/dev/null || echo "Debug directory not found"
