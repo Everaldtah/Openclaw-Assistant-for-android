@@ -20,7 +20,23 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        run: |
+          sudo -u root -E bash -c 'wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O /tmp/cmdline-tools.zip && \
+          mkdir -p /opt/android-sdk/cmdline-tools/latest && \
+          unzip -q /tmp/cmdline-tools.zip -d /opt/android-sdk/cmdline-tools && \
+          mv /opt/android-sdk/cmdline-tools/cmdline-tools/* /opt/android-sdk/cmdline-tools/latest/ && \
+          rm -rf /opt/android-sdk/cmdline-tools/cmdline-tools /tmp/cmdline-tools.zip'
+          echo "ANDROID_SDK_ROOT=/opt/android-sdk" >> $GITHUB_ENV
+          echo "ANDROID_HOME=/opt/android-sdk" >> $GITHUB_ENV
+          echo "/opt/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
+
+      - name: Accept Android SDK licenses
+        run: |
+          yes | sdkmanager --licenses || true
+
+      - name: Install Android SDK components
+        run: |
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -31,11 +47,14 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
+            /opt/android-sdk
           key: gradle-${{ hashFiles('**/*.gradle.kts', 'gradle/libs.versions.toml', 'gradle/wrapper/gradle-wrapper.properties') }}
-          restore-keys: gradle-
+          restore-keys: |
+            gradle-
+            sdk-
 
       - name: Create local.properties
-        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+        run: echo "sdk.dir=/opt/android-sdk" > local.properties
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
