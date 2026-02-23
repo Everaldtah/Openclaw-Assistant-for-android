@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand -->
+    <color name="purple_primary">#FF6200EE</color>
+    <color name="purple_variant">#BB86FC</color>
+    <color name="teal_accent">#03DAC6</color>
+    <color name="green_active">#00DC64</color>
+
+    <!-- Dark theme backgrounds -->
+    <color name="bg_dark">#0D0D1A</color>
+    <color name="surface">#1A1A2E</color>
+    <color name="surface_variant">#252540</color>
+
+    <!-- Text -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#AAAACC</color>
+    <color name="text_disabled">#55555577</color>
+
+    <!-- Status -->
+    <color name="status_connected">#00DC64</color>
+    <color name="status_connecting">#FFD600</color>
+    <color name="status_disconnected">#FF4444</color>
+</resources>

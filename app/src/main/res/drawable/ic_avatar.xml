@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="80"
+    android:viewportHeight="80">
+
+    <!-- Outer circle -->
+    <path
+        android:fillColor="#FF6200EE"
+        android:pathData="M40,40m-38,0a38,38 0,1 1,76 0a38,38 0,1 1,-76 0" />
+
+    <!-- Inner highlight -->
+    <path
+        android:fillColor="#20FFFFFF"
+        android:pathData="M40,10m-20,0a20,20 0,1 1,40 0a20,20 0,1 1,-40 0" />
+
+    <!-- Left eye -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M27,33 a5,6 0,1 1,10 0 a5,6 0,1 1,-10 0" />
+    <!-- Left pupil -->
+    <path
+        android:fillColor="#1A1A2E"
+        android:pathData="M30,33 a2,2.5 0,1 1,4 0 a2,2.5 0,1 1,-4 0" />
+
+    <!-- Right eye -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M43,33 a5,6 0,1 1,10 0 a5,6 0,1 1,-10 0" />
+    <!-- Right pupil -->
+    <path
+        android:fillColor="#1A1A2E"
+        android:pathData="M46,33 a2,2.5 0,1 1,4 0 a2,2.5 0,1 1,-4 0" />
+
+    <!-- Smile -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:pathData="M28,50 Q40,62 52,50" />
+</vector>

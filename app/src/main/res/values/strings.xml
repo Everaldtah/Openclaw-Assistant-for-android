@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">OpenClaw Assistant</string>
+    <string name="hint_server_url">WebSocket URL (ws:// or wss://)</string>
+    <string name="hint_jwt">JWT Token (optional)</string>
+    <string name="btn_start">START ASSISTANT</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_save_config">Save Configuration</string>
+    <string name="label_status">Connection status</string>
+    <string name="notif_title">OpenClaw Assistant</string>
+    <string name="notif_text">Active – listening and watching</string>
+</resources>

@@ -1,0 +1,53 @@
+# Android build outputs
+*.apk
+*.aab
+*.ap_
+*.dex
+bin/
+gen/
+out/
+build/
+.cxx/
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+gradleFailures.xml
+
+# IntelliJ / Android Studio
+*.iml
+*.iws
+*.ipr
+.idea/
+*.DS_Store
+captures/
+.externalNativeBuild/
+
+# Signing – NEVER commit real keystores
+keystore.jks
+*.jks
+*.keystore
+release/
+
+# Local config – contains SDK paths
+local.properties
+
+# Environment / secrets
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Logs
+*.log
+/tmp/
+
+# OS
+Thumbs.db
+.DS_Store

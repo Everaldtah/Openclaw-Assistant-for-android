@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="16dp"
+    android:viewportWidth="32"
+    android:viewportHeight="16">
+    <!-- Open mouth (ellipse) -->
+    <path
+        android:fillColor="#1A1A2E"
+        android:pathData="M2,2 Q16,18 30,2 L30,14 Q16,4 2,14 Z" />
+    <!-- Teeth hint -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6,3 L26,3 L26,7 Q16,4 6,7 Z" />
+</vector>

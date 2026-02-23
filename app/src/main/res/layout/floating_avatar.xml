@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- Glow ring behind avatar -->
+    <ImageView
+        android:id="@+id/glowRing"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_glow_ring"
+        android:layout_gravity="center"
+        android:alpha="0.5" />
+
+    <!-- Animated avatar (self-contained view with mouth indicator) -->
+    <com.openclaw.assistant.ui.AvatarView
+        android:id="@+id/avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp" />
+
+</FrameLayout>
