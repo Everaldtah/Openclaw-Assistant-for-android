@@ -215,8 +215,8 @@ def index():
         "version": "2.0.0",
         "endpoints": {
             "ws": f"ws://{HOST}:{PORT}/ws",
-            "health": f"http://{HOST}:{PORT}/health",
-            "stats": f"http://{HOST}:{PORT}/stats"
+            "health": f"https://{HOST}:{PORT}/health",
+            "stats": f"https://{HOST}:{PORT}/stats"
         }
     }
 
